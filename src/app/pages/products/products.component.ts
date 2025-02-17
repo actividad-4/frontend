@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { ProductModalComponent } from '../../components/product-modal/product-modal/product-modal.component';
 import { DeleteModalComponent } from '../../components/delete-modal/delete-modal/delete-modal.component';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-products',
@@ -17,12 +18,16 @@ export class ProductsComponent implements OnInit {
   constructor(
     private router: Router,
     private productsService: ProductsService,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private toast: ToastService
   ){}
 
   public products = signal<Product[]>([])
 
   async ngOnInit(): Promise<void> {
+
+    // this.toast.show('Prueba', 'Prueba');
+
     try {
       const products = await this.productsService.getProducts();
       this.products.set([...products])
@@ -84,11 +89,12 @@ export class ProductsComponent implements OnInit {
   async createProduct() {
     try {
       const createProduct = await this.openProductModal({ title: 'Crear producto'});
-      if(!createProduct) throw new Error();
 
-      await this.productsService.createProduct(createProduct);
-      const products = await this.productsService.getProducts();
-      this.products.set([...products])
+      if(createProduct) {
+        await this.productsService.createProduct(createProduct);
+        const products = await this.productsService.getProducts();
+        this.products.set([...products])
+      }
     } catch (error) {
       console.error(error)
     }

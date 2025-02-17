@@ -1,55 +1,43 @@
 <!-- As a link -->
 <nav class="navbar bg-body-tertiary p-3">
   <div class="d-flex align-items-center justify-content-between w-100">
-    <p class="fs-3 fw-bold">App Products</p>
+    <p class="fs-3 fw-bold m-0">Productos</p>
 
     <button class="btn btn-link" (click)="closeSession()">Cerrar sesión</button>
   </div>
 </nav>
 
 <div class="container p-4 col-12 col-md-7 col-lg-5 col-xl-4">
+  <button class="btn btn-primary d-flex align-items-center" (click)="createProduct()">
+    <i class="fa-solid fa-plus me-2"></i>
+    Crear producto
+  </button>
 
-  <div class="w-100 d-flex justify-content-between align-items-center mb-3">
-    <h2 clas>Productos</h2>
-    <div>
-      <button class="btn btn-primary" (click)="createProduct()">Crear producto</button>
+  @if(!products().length) {
+    <div class="w-100 border border-2 rounded-4 p-3 p-md-5 text-center">
+      <i class="fa-solid fa-box-open fs-1 mb-2"></i>
+      <h5 class="m-0">Aún no hay productos agregados</h5>
+      <small class="text-secondary">Crea uno para comenzar</small>
     </div>
-  </div>
-
-  @for (item of products(); track item.id) {
-    <div class="border border-2 rounded-4 p-3 mb-4">
-
-      <h4>{{ item.name }}</h4>
-      <p class="fw-bold fs-3">{{ item.price | currency }}</p>
-      <p>{{ item.description  }}</p>
-
-      <div class="row mt-3">
-        <div class="col-12 col-lg-6 mb-3">
-          <button class="w-100 btn btn-outline-primary" (click)="updateProduct(item.id, item)">Editar</button>
-        </div>
-        <div class="col-12 col-lg-6">
-          <button class="w-100 btn btn-danger" (click)="deleteProduct(item.id)">Eliminar</button>
-        </div>
-      </div>
-    </div>  
   }
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-        <button type="button" class="btn-close"></button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
-      </div>
-    </div>
-  </div>
+  @if(products()) {
+    @for (item of products(); track item.id) {
+      <div class="border border-2 rounded-4 p-3 mb-4">
+  
+        <h4>{{ item.name }}</h4>
+        <p class="fw-bold fs-3">{{ item.price | currency }}</p>
+        <p>{{ item.description  }}</p>
+  
+        <div class="row mt-3">
+          <div class="col-12 col-lg-6 mb-3">
+            <button class="w-100 btn btn-outline-primary" (click)="updateProduct(item.id, item)">Editar</button>
+          </div>
+          <div class="col-12 col-lg-6">
+            <button class="w-100 btn btn-danger" (click)="deleteProduct(item.id)">Eliminar</button>
+          </div>
+        </div>
+      </div>  
+    }
+  }
 </div>
