@@ -19,15 +19,11 @@ export class ProductsComponent implements OnInit {
     private router: Router,
     private productsService: ProductsService,
     private modalService: NgbModal,
-    private toast: ToastService
   ){}
 
   public products = signal<Product[]>([])
 
   async ngOnInit(): Promise<void> {
-
-    // this.toast.show('Prueba', 'Prueba');
-
     try {
       const products = await this.productsService.getProducts();
       this.products.set([...products])

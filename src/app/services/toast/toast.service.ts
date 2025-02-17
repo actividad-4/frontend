@@ -1,8 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 
 export interface ToastInfo {
-  header: string;
-  body: string;
+  header?: string;
+  body?: string;
   delay?: number;
 }
 
@@ -14,8 +14,9 @@ export class ToastService {
 
   toasts = signal<ToastInfo[]>([]);
 
-  show(header: string, body: string) {
-    this.toasts().push({ header, body });
+  show(options: {header?: string, body?: string, delay?: number}) {
+    const { header, body, delay } = options
+    this.toasts().push({ header, body, delay });
   }
 
   remove(toast: ToastInfo) {

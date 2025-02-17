@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastService } from '../../../services/toast/toast.service';
 
 interface ProductForm {
   description :FormControl<string | null>
@@ -17,7 +18,10 @@ interface ProductForm {
 
 export class ProductModalComponent {
 
-  constructor(private modal: NgbActiveModal) {}
+  constructor(
+    private modal: NgbActiveModal,
+    private toast: ToastService
+  ) {}
 
   title: string = 'Crear producto'
 
@@ -28,7 +32,10 @@ export class ProductModalComponent {
   })
 
   onSubmit() {
-    if(this.form.invalid) return
+    if(this.form.invalid) {
+      this.toast.show({ body: 'Favor de completar todos los campos' })
+      return
+    }
 
     const formValue = this.form.value
     this.modal.close({...formValue})
