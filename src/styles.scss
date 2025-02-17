@@ -1,5 +1,6 @@
 // Variable overrides first
 $primary: rgb(82, 0, 153);
+$secondary: #dd9fdc;
 $enable-shadows: true;
 $prefix: "mo-";
 
@@ -9,3 +10,5 @@ $prefix: "mo-";
 p {
   margin: 0;
 }
+/* Importing Bootstrap SCSS file. */
+@import 'bootstrap/scss/bootstrap';

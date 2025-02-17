@@ -1,0 +1,48 @@
+<div class="p-4">
+
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-center">{{ title }}</h2>
+    <i class="fa-solid fa-xmark fs-2" role="button" (click)="close()"></i>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="mb-3">
+      <label for="text" class="form-label">Nombre:</label>
+      <input 
+        type="text" 
+        formControlName="name" 
+        class="form-control" 
+        id="text" 
+        placeholder="Ingresa el nombre del producto" 
+        autocomplete="off"
+      >
+    </div>
+    
+    <div class="mb-3">
+      <label for="price" class="form-label">Precio:</label>
+      <input 
+        type="number" 
+        formControlName="price" 
+        class="form-control" 
+        id="price" 
+        placeholder="Ingresa el precio del producto" 
+        autocomplete="off"
+      >
+    </div>
+    
+    <div class="mb-3">
+      <label for="description" class="form-label">Descripción:</label>
+      <textarea  
+        class="form-control" 
+        name="description" 
+        rows="5" 
+        formControlName="description" 
+        id="description" 
+        placeholder="Ingresa la descripción del producto" 
+        autocomplete="off"
+      ></textarea>
+    </div>
+
+    <input type="submit" value="Guardar" class="btn btn-primary w-100 py-3">
+  </form>
+</div>

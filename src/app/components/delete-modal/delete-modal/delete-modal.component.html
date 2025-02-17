@@ -1,0 +1,14 @@
+<div class="p-4">
+  <h2 class="text-center m-0">{{ title() }}</h2>
+
+  <p class="text-center my-4">{{ message() }}</p>
+
+  <div class="row mt-3">
+    <div class="col-12 col-lg-6 mb-3">
+      <button class="w-100 btn btn-outline-primary" (click)="close(false)">Cancelar</button>
+    </div>
+    <div class="col-12 col-lg-6">
+      <button class="w-100 btn btn-danger" (click)="close(true)">Eliminar</button>
+    </div>
+  </div>
+</div>
